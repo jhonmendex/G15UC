@@ -5,13 +5,16 @@ import authorRouter from "./routes/v1/authorRoutes.js";
 import editorialRouter from "./routes/v1/editorialRoutes.js";
 import userRouter from "./routes/v1/userRoutes.js";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
 const app = express();
 
-//midleware
+//midleware para responder datos tipo json
 app.use(express.json());
+//midleware para analizar cookies
+app.use(cookieParser());
 //midleware cors
 app.use(
   cors({
@@ -22,6 +25,7 @@ app.use(
   })
 );
 //midleware routes
+
 app.use("/api/v1/book", bookRouter);
 app.use("/api/v1/author", authorRouter);
 app.use("/api/v1/editorial", editorialRouter);

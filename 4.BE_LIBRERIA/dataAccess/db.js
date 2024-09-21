@@ -55,6 +55,12 @@ class DataAccess {
     const data = await collection.deleteOne({ _id: new ObjectId(id) });
     return data;
   }
+
+  async findByField(collectionName, field, value) {
+    const collection = this.db.collection(collectionName);
+    const data = await collection.findOne({ [field]: value });
+    return data;
+  }
 }
 
 export default DataAccess;

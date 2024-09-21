@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Enviar Correo</title>
+  </head>
+  <body>
+    ss
+    <form id="my-form">
+      <input type="email" id="email" placeholder="Tu correo" />
+      <textarea id="message"></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"
+    ></script>
+    <script>
+      const form = document.getElementById("my-form");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        emailjs.init("FXWcWwLBWc6NIrP0x");
+
+        const params = {
+          from_name: "Tu Nombre",
+          to_name: "Destinatario",
+          to_email: document.getElementById("email").value,
+          message: document.getElementById("message").value,
+        };
+
+        emailjs.send("service_7t8xx7x", "template_6jy30ko", params).then(
+          function (response) {
+            console.log("SUCCESS!", response.status, response.text);
+          },
+          function (error) {
+            console.log("FAILED...", error);
+          }
+        );
+      });
+    </script>
+  </body>
+</html>

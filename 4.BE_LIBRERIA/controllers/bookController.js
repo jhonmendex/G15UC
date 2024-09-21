@@ -1,5 +1,7 @@
 import bookService from "../services/bookService.js";
 const getBooks = async (req, res) => {
+  const cookie = req.cookies["token"];
+  if (!cookie) return res.status(401).json({ message: "Unauthorized" });
   const data = await bookService.getBooks();
   res.json(data);
 };
