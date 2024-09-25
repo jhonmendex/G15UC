@@ -1,34 +1,28 @@
-import DataAccess from "../dataAccess/db.js";
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
 
-const dataAccess = new DataAccess();
-
-(async () => {
-  dataAccess.connect();
-})();
-
-const collectionName = "autor";
 const getAuthors = async () => {
-  const data = await dataAccess.findAll(collectionName);
+  const data = await prisma.autor.findMany();
   return data;
 };
 
 const getAuthor = async (id) => {
-  const data = await dataAccess.findOne(collectionName, id);
+  const data = await prisma.autor.findUnique({ where: { id } });
   return data;
 };
 
 const createAuthor = async (body) => {
-  const data = await dataAccess.createOne(collectionName, body);
+  const data = await prisma.autor.create({ data: body });
   return data;
 };
 
 const updateAuthor = async (id, body) => {
-  const data = await dataAccess.updateOne(collectionName, id, body);
+  const data = await prisma.autor.update({ where: { id }, data: body });
   return data;
 };
 
 const deleteAuthor = async (id) => {
-  const data = await dataAccess.deleteOne(collectionName, id);
+  const data = await prisma.autor.delete({ where: { id } });
   return data;
 };
 

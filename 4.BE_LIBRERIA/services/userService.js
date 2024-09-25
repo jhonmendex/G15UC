@@ -1,19 +1,9 @@
-import DataAccess from "../dataAccess/db.js";
-import bcrypt from "bcrypt";
-import dotenv from "dotenv";
+import { PrismaClient } from "@prisma/client";
 
-dotenv.config();
-
-const dataAccess = new DataAccess();
-
-(async () => {
-  dataAccess.connect();
-})();
-
-const collectionName = "usuario";
+const prisma = new PrismaClient();
 
 const getUser = async (id) => {
-  const data = await dataAccess.findOne(collectionName, id);
+  const data = await prisma.user.findUnique({ where: { id } });
   return data;
 };
 
@@ -23,13 +13,13 @@ const createUser = async (body) => {
     password: await generateHash(body.password),
   };
 
-  const data = await dataAccess.createOne(collectionName, user);
+  const data = await prisma.user.create({ data: user });
   return data;
 };
 
 const login = async (body) => {
   const { email, password } = body;
-  const user = await dataAccess.findByField(collectionName, "email", email);
+  const user = await prisma.user.findUnique({ where: { email } });
   if (user) {
     const validate = await compareHash(password, user.password);
     if (!validate) {
