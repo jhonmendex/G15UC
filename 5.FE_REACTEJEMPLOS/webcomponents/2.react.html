@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React js</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script>
+      //donde quiero renderizar
+      const app = document.getElementById("app");
+      //que quiero renderizar
+      const Button = React.createElement(
+        "button",
+        {
+          style: { color: "red" },
+          onClick: () => {
+            alert("clic aqui");
+          },
+        },
+        "Mi boton"
+      );
+      //renderizar
+      ReactDOM.render(Button, app);
+    </script>
+  </body>
+</html>

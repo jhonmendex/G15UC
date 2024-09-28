@@ -1,0 +1,21 @@
+.navbar{
+  list-style-type: none;
+  margin: 0;
+  background-color: #333;
+  display: flex;
+}
+
+.navbar li{
+  margin-right: 15px;
+}
+
+.navbar li a{
+  color: wheat;
+  text-decoration: none;
+  padding: 5px;
+}
+
+.navbar li a:hover{
+  color: aliceblue;
+  background-color: #333;
+}
